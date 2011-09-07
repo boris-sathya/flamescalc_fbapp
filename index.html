@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+	<style type="text/css">
+	/* CSS Document */
+
+body	{
+	background-image:url('bg.png');
+	font-size: 0.9em;
+	color: #000;
+    text-align:center;
+	font-family: Arial, Helvetica, sans-serif;
+	/*width: 100%;*/
+	padding: 2em;
+	width: 93%;
+}
+
+div.image {
+  position:absolute;
+  width: 100%;
+  text-align: center;
+}
+#wrapper  {
+    margin: 0 auto;
+    width: 100%;
+    text-align:left;
+   }
+
+
+h1	{
+	font-size: 1.8em;
+	font-family: Georgia;
+	color: #0099CC;
+}
+
+li	{
+	margin:0;
+        list-style:none;
+	padding-left: 0;
+}
+
+#switcher	{
+	border: double #0099cc 1px;
+	padding: 5px;
+}
+
+#switcher p	{
+	font-weight: bold;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	display: inline;
+}
+
+ul	{
+	display: inline;
+}
+
+a	{
+	text-decoration: none;
+	color: #0099cc;
+}
+
+a:hover	{
+	text-decoration: none;
+	color: #000;
+	border-bottom: dashed 1px #FF6600;
+}
+.right
+{
+	float:right;
+}
+table
+{
+	table-layout:fixed;
+}
+td {overflow:hidden;} </style> </head>
+<title>JS</title>
+
+<script language= JavaScript>
+ 
+function fla(fla_number) {
+        var ans = new Array();
+        ans[0] = 'FRIEND';
+        ans[1] = 'LOVE';
+        ans[2] = 'AFFECTION';
+        ans[3] = 'MARRIAGE';
+        ans[4] = 'ENEMY';
+        ans[5] = 'SISTER';
+        ans[6] = '0';
+   var fla_backup,arr_adj,count_cal,mod_holder;
+    //fla_number =  document.f1.t1.value;
+    fla_backup = fla_number;
+  var n=0;
+ 
+   for(n=6;n!=1;n--)
+     {
+        mod_holder = (fla_number % n);
+        arr_adj = mod_holder - 1;
+        while ((arr_adj!=n)&&(arr_adj>=0))
+          {
+             ans[arr_adj] = ans[arr_adj + 1];
+             arr_adj = arr_adj + 1;
+
+          }
+         if(mod_holder == 0)
+           {
+             count_cal = 0;
+             ans[n-1] = 0;
+            }
+          else
+            {
+              count_cal = n - mod_holder;
+            }
+         fla_number = fla_backup;
+         fla_number = fla_number - count_cal;
+        }
+           //document.write(body {background-image:url('bg.png')});
+           alert(" Relation between " + document.f1.t1.value + " and " + document.f1.t2.value + " is " + ans[0]);
+   }
+  function calc()  {
+           mname = document.f1.t1.value
+           fname = document.f1.t2.value
+           count = 0
+          // alert(fname.charAt(2));
+           mname = mname.toLowerCase()
+           fname = fname.toLowerCase()
+           mname = mname.replace(/\s/g, "");
+           fname = fname.replace(/\s/g, "");
+           len = mname.length + fname.length
+          // alert(mname.length);
+           for(i=0;i<mname.length;i++)
+            {  
+                
+               for(j=0;j<fname.length;j++)
+                {  
+                      //alert(mname.charAt(i) + fname.charAt(j));
+                   if((mname.charAt(i)) == (fname.charAt(j)))
+                      {
+                         count++
+                      fname =   fname.substr(0, j) + '0' + fname.substr(j+1);
+              
+                        // alert(count);
+                         break
+                       }
+             }
+       }
+       v = (len - (count*2));
+      //alert(v);
+      fla(v);
+}
+
+</script>
+<body>
+	
+	<div id="fb-root"></div>
+<script type="text/javascript">
+    window.fbAsyncInit = function() {
+ FB.init({appId: '216111598442012', status: true, cookie: true, xfbml: true});
+ 
+     /* All the events registered */
+     FB.Event.subscribe('auth.login', function(response) {
+         // do something with response
+         login();
+     });
+     FB.Event.subscribe('auth.logout', function(response) {
+         // do something with response
+         logout();
+     });
+ 
+     FB.getLoginStatus(function(response) {
+         if (response.session) {
+             // logged in and connected user, someone you know
+             login();
+         }
+     });
+ };
+    (function() {
+        var e = document.createElement('script');
+        e.type = 'text/javascript';
+        e.src = document.location.protocol +
+            '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+    }());
+     function login(){
+                FB.api('/me', function(response) {
+                    document.getElementById('login').style.display = "block";
+                    document.getElementById('login').innerHTML = response.name + " succsessfully logged in!";
+                });
+            }
+            function logout(){
+                document.getElementById('login').style.display = "none";
+            }
+  function graphStreamPublish(){
+                var body = 'Checkout this new Flames APP';
+                FB.api('/me/feed', 'post', { message: body }, function(response) {
+                    if (!response || response.error) {
+                        alert('Error occured');
+                    } else {
+                        alert('Post ID: ' + response.id);
+                    }
+                });
+            }
+    </script>
+    
+<form name=f1>
+  <center> <br />
+  	 <i>FLAMES Calculator</i> <br />
+  	    <h5>Find the relation between you and your dear ones</h5>
+  	    <h6><i>Note: The Names you enter will Neither be stored Nor be published on your wall</i></h6>
+  	    <fb:login-button autologoutlink="true" perms="email,user_birthday,status_update,publish_stream"></fb:login-button> <br /> <br />
+     Name1: <input type = text  name = t1 size = 20> <br /> <br />
+     Name2: <input type = text  name = t2 size = 20> <br /> <br />
+     <input type = Button value = "Calculate" onClick = calc();> <br /> <br />
+     <input type = Button value = "Publish Stream" onClick = "graphStreamPublish(); return false;"> <br />
+   
+   </center>
+  </form>
+</body>
+</html>
