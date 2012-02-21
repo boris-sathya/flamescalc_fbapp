@@ -87,7 +87,7 @@ function fla(fla_number) {
         ans[5] = 'SISTER';
         ans[6] = '0';
    var fla_backup,arr_adj,count_cal,mod_holder;
-    //fla_number =  document.f1.t1.value;
+    
     fla_backup = fla_number;
   var n=0;
  
@@ -113,38 +113,38 @@ function fla(fla_number) {
          fla_number = fla_backup;
          fla_number = fla_number - count_cal;
         }
-           //document.write(body {background-image:url('bg.png')});
+           
            alert(" Relation between " + document.f1.t1.value + " and " + document.f1.t2.value + " is " + ans[0]);
    }
   function calc()  {
            mname = document.f1.t1.value
            fname = document.f1.t2.value
            count = 0
-          // alert(fname.charAt(2));
+          
            mname = mname.toLowerCase()
            fname = fname.toLowerCase()
            mname = mname.replace(/\s/g, "");
            fname = fname.replace(/\s/g, "");
            len = mname.length + fname.length
-          // alert(mname.length);
+         
            for(i=0;i<mname.length;i++)
             {  
                 
                for(j=0;j<fname.length;j++)
                 {  
-                      //alert(mname.charAt(i) + fname.charAt(j));
+                      
                    if((mname.charAt(i)) == (fname.charAt(j)))
                       {
                          count++
                       fname =   fname.substr(0, j) + '0' + fname.substr(j+1);
               
-                        // alert(count);
+                       
                          break
                        }
              }
        }
        v = (len - (count*2));
-      //alert(v);
+      
       fla(v);
 }
 
